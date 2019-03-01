@@ -3,7 +3,6 @@ package com.econo.hackday.contentsproxyblog.utils;
 import org.eclipse.egit.github.core.RepositoryContents;
 import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.service.ContentsService;
-import org.eclipse.egit.github.core.service.RepositoryService;
 import org.eclipse.egit.github.core.util.EncodingUtils;
 
 import java.io.FileNotFoundException;
@@ -18,7 +17,7 @@ public class EgitUtil {
         String filePath = getFilePath(uri);
 
         List<RepositoryContents> contents = contentsService.getContents(createRepositoryId(uri), filePath);
-        if(contents.size() == 0){
+        if (contents.size() == 0) {
             throw new FileNotFoundException(filePath);
         }
         String content = contents.get(0).getContent();
@@ -26,7 +25,7 @@ public class EgitUtil {
         return new String(EncodingUtils.fromBase64(content));
     }
 
-    public static RepositoryId createRepositoryId(String uri){
+    public static RepositoryId createRepositoryId(String uri) {
         String[] tokens = uri.split("/");
         String owner = tokens[3];
         String repository = tokens[4];
@@ -34,7 +33,7 @@ public class EgitUtil {
         return RepositoryId.create(owner, repository);
     }
 
-    public static String getFilePath(String uri){
+    public static String getFilePath(String uri) {
         return uri.split("/blob")[1];
     }
 }
