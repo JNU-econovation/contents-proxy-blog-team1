@@ -9,19 +9,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/posts")
 public class PostController {
 
-    @GetMapping
-    public void getPosts() {
+    @GetMapping("")
+    public String getPosts() {
+        return "index";
+    }
 
+    @PostMapping("")
+    public String createPost() {
+        return "redirect:/posts";
     }
 
     @GetMapping("/{id}")
-    public void getPostDetail() {
-
+    public String getPostDetail() {
+        return "show";
     }
 
-    @PostMapping
-    public void createPost() {
-
+    @GetMapping("/form")
+    public String getPostForm() {
+        return "form";
     }
 
 }
