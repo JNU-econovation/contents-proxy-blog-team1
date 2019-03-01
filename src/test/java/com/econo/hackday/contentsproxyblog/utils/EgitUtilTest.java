@@ -1,12 +1,17 @@
 package com.econo.hackday.contentsproxyblog.utils;
 
 import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.service.ContentsService;
+import org.eclipse.egit.github.core.util.EncodingUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.util.Base64;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 public class EgitUtilTest {
@@ -18,11 +23,11 @@ public class EgitUtilTest {
     }
 
     @Test
-    public void getRepositoryTest() throws IOException {
-        //https://github.com/JNU-econovation/contents-proxy-blog-team1/blob/master/README.md
-        Repository repository = egitUtil.repositoryService.getRepository("JNU-econovation", "contents-proxy-blog-team1");
-        System.out.println(repository.getGitUrl());
-        System.out.println(repository.getHomepage());
+    public void getContextTest() throws Exception {
+        RepositoryId repositoryId = new RepositoryId("dadadamarine", "Chooser");
         ContentsService contentsService = new ContentsService();
+        String content = contentsService.getReadme(repositoryId).getContent();
+
+        assertThat(new String(EncodingUtils.fromBase64(content), "UTF-8")).isEqualTo("a\n");
     }
 }
