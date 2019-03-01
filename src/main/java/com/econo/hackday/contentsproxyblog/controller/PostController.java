@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PostController {
 
     @GetMapping
-    public void getPosts(){
+    public void getPosts() {
 
     }
 
     @GetMapping("/{id}")
-    public void getPostDetail(){
+    public void getPostDetail() {
 
     }
 
     @PostMapping
-    public void createPost(){
+    public void createPost() {
 
     }
 
