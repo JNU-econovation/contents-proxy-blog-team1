@@ -20,5 +20,4 @@ public class Post {
     @Column(nullable = false)
     private String url;
 
-
 }
