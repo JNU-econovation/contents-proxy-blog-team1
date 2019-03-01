@@ -19,7 +19,7 @@ public class PostController {
         return "form";
     }
 
-    @PostMapping
+    @PostMapping("")
     public String createPost() {
         return "show";
     }
