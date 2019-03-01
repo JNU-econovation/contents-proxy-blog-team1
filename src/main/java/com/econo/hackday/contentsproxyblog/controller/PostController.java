@@ -14,14 +14,19 @@ public class PostController {
         return "index";
     }
 
-    @GetMapping("/{id}")
-    public String getPostDetail() {
-        return "form";
-    }
-
     @PostMapping("")
     public String createPost() {
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/{id}")
+    public String getPostDetail() {
         return "show";
+    }
+
+    @GetMapping("/form")
+    public String getPostForm() {
+        return "form";
     }
 
 }
