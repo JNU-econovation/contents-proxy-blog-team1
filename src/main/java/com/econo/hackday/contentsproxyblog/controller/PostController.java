@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/posts")
 public class PostController {
 
-    @GetMapping
-    public void getPosts() {
-
+    @GetMapping("")
+    public String getPosts() {
+        return "index";
     }
 
     @GetMapping("/{id}")
-    public void getPostDetail() {
-
+    public String getPostDetail() {
+        return "form";
     }
 
     @PostMapping
-    public void createPost() {
-
+    public String createPost() {
+        return "show";
     }
 
 }
