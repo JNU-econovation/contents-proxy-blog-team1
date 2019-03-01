@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,11 +24,35 @@ public class EgitUtilTest {
     }
 
     @Test
-    public void getContextTest() throws Exception {
+    public void 예시md파일가져오기테스트() throws Exception {
         RepositoryId repositoryId = new RepositoryId("dadadamarine", "Chooser");
         ContentsService contentsService = new ContentsService();
         String content = contentsService.getReadme(repositoryId).getContent();
 
         assertThat(new String(EncodingUtils.fromBase64(content), "UTF-8")).isEqualTo("a\n");
+    }
+
+    @Test
+    public void 특정url파일가져오기테스트() throws Exception {
+        RepositoryId repositoryId = new RepositoryId("JNU-econovation", "contents-proxy-blog-team1");
+        ContentsService contentsService = new ContentsService();
+        String uri2 = "README.md";
+
+        String rawContent2=contentsService.getContents(repositoryId, uri2).get(0).getContent();
+        String content = new String(EncodingUtils.fromBase64(rawContent2),"UTF-8");
+        assertThat(content).contains("## 기술 스택\n" +
+                "- Java 11\n" +
+                "- Web tier : Spring Boot (+ Spring Web MVC)\n" +
+                "- Perstence layer : JPA (Hibernate)\n" +
+                "- github 연동 : [egit-github](https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core)\n" +
+                "- markdown -> html 렌더링\n" +
+                "    - 서버에서 할 경우 : [flexmark-java](https://github.com/vsch/flexmark-java)\n" +
+                "    - 클라이언트에서 할 경우 : [markdown-it](https://github.com/markdown-it/markdown-it)\n" +
+                "- DB : H2db\n\n");
+    }
+
+    @Test
+    public void 주어진url의파일가져오기테스트(){
+
     }
 }
