@@ -15,8 +15,12 @@ import java.util.regex.Pattern;
 
 public class GithubMarkdownLoader {
     //(^[.*]$)6
+	private static final String PATH_SPLITTER = "/blob/master";
     private static final String IMAGE_MARKDOWN_PATTERN = "!\\[(.)+\\]\\((.)+\\)";
+    private static final String IMAGE_URI_PATTERN="[^\\(]+\\.(jpg|png|jpen|bmp)";
+
     private static Pattern pattern = Pattern.compile(IMAGE_MARKDOWN_PATTERN);
+    private static Pattern imageUriPattern = Pattern.compile(IMAGE_URI_PATTERN);
 
     public static String getContents(String uri) throws IOException {
         String filePath = getFilePath(uri);
@@ -27,28 +31,57 @@ public class GithubMarkdownLoader {
             throw new GithubFileNotFoundException(filePath);
         }
 
-        return new String(EncodingUtils.fromBase64(contents.get(0).getContent()));
+        return convertRlativeUrisToAbsolute(
+        		new String(EncodingUtils.fromBase64(contents.get(0).getContent()))
+				,getInfoPath(uri)
+		);
     }
 
     public static String getFilePath(String uri) {
-        return uri.split("/blob/master")[1];
+        return uri.split(PATH_SPLITTER)[1];
     }
 
-    public static Boolean hasImage(String imageMarkdown){
-        Matcher matcher = pattern.matcher(imageMarkdown);
+    public static String getInfoPath(String uri){
+    	return uri.split(PATH_SPLITTER)[0]+PATH_SPLITTER;
+	}
+
+    public static Boolean hasImage(String markdownContents){
+        Matcher matcher = pattern.matcher(markdownContents);
         while (matcher.find()){
             return true;
         }
-
         return false;
     }
 
-    public static boolean IsRelativeImage(String imageURI){
+    public static boolean isRelativeImage(String imageUri){
         try {
-            new URL(imageURI);
+            new URL(imageUri);
         } catch (MalformedURLException e) {
             return true;
         }
         return false;
     }
+
+    public static String convertRlativeUrisToAbsolute(String markdownContents, String infoPath){
+    	Matcher matcher = pattern.matcher(markdownContents);
+		StringBuffer replacedString = new StringBuffer();
+		while(matcher.find()) {
+			String convertedURI = toAbsolute(matcher.group(), infoPath);
+			matcher.appendReplacement(replacedString, convertedURI);
+		}
+		matcher.appendTail(replacedString);
+
+		return replacedString.toString();
+	}
+
+	private static String toAbsolute(String imageMarkdown, String infoPath) {
+    	Matcher matcher = imageUriPattern.matcher(imageMarkdown);
+		StringBuffer replacedString = new StringBuffer();
+		if(matcher.find()){
+    		matcher.appendReplacement(replacedString, infoPath+"/"+matcher.group()+"?raw=true");
+		}
+		matcher.appendTail(replacedString);
+
+		return replacedString.toString();
+	}
 }

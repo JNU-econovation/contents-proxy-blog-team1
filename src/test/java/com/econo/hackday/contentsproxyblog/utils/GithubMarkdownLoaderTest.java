@@ -39,7 +39,8 @@ public class GithubMarkdownLoaderTest {
                 "![Alt text](/path/to/imlg.jpg)\n" +
                 "![Alt text](/path/to/imdg.jpg)\n"+
                 "![Alt text](/path/to/ismg.jpg)\n"+
-                "![Alt text](/path/to/imgx.jpg)\n";
+                "![Alt text](/path/to/imgx.jpg)\n"+
+                "ekf dekdenasdw";
         assertThat(GithubMarkdownLoader.hasImage(imageMarkdown))
                 .isEqualTo(true);
     }
@@ -47,9 +48,19 @@ public class GithubMarkdownLoaderTest {
     @Test
     public void isRelativeImageTest() throws MalformedURLException {
         String uri = "https://github.com/JNU-econovation/contents-proxy-blog-team1/blob/master/README.md";
-        assertThat(GithubMarkdownLoader.IsRelativeImage(uri)).isEqualTo(false);
+        assertThat(GithubMarkdownLoader.isRelativeImage(uri)).isEqualTo(false);
 
         String uri1 = "/JNU-econovation/contents-proxy-blog-team1/blob/master/README.md";
-        assertThat(GithubMarkdownLoader.IsRelativeImage(uri1)).isEqualTo(true);
+        assertThat(GithubMarkdownLoader.isRelativeImage(uri1)).isEqualTo(true);
+    }
+
+    @Test
+    public void convertRlativeToAbsolute() {
+        String uri = "https://github.com/JNU-econovation/markdown-study/blob/master/picture/economark.jpg?raw=true";
+
+        String imageMarkdown = "212" +
+                "![Alt text](path/to/imgx.jpg)";
+        assertThat(GithubMarkdownLoader.convertRlativeUrisToAbsolute(imageMarkdown, GithubMarkdownLoader.getInfoPath(uri)))
+                .isEqualTo("212![Alt text](https://github.com/JNU-econovation/markdown-study/blob/master/path/to/imgx.jpg?raw=true)");
     }
 }
