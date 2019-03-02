@@ -77,9 +77,15 @@ public class GithubMarkdownLoader {
 	private static String toAbsolute(String imageMarkdown, String infoPath) {
     	Matcher matcher = imageUriPattern.matcher(imageMarkdown);
 		StringBuffer replacedString = new StringBuffer();
+		String filePath="";
 		if(matcher.find()){
-    		matcher.appendReplacement(replacedString, infoPath+"/"+matcher.group()+"?raw=true");
+			 filePath= matcher.group();
 		}
+		if(!isRelativeImage(filePath)){
+			return imageMarkdown;
+		}
+		matcher.appendReplacement(replacedString, infoPath+"/"+matcher.group()+"?raw=true");
+
 		matcher.appendTail(replacedString);
 
 		return replacedString.toString();
