@@ -6,7 +6,6 @@ import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.service.ContentsService;
 import org.eclipse.egit.github.core.util.EncodingUtils;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 

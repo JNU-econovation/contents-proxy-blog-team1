@@ -1,8 +1,6 @@
 package com.econo.hackday.contentsproxyblog.utils;
 
 import org.eclipse.egit.github.core.RepositoryId;
-import org.eclipse.egit.github.core.service.ContentsService;
-import org.eclipse.egit.github.core.util.EncodingUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -42,7 +40,7 @@ public class GithubMarkdownLoaderTest {
     @Test
     public void getFilePathTest() throws MalformedURLException {
         String uri = "https://github.com/JNU-econovation/contents-proxy-blog-team1/blob/test/README.md";
-        System.out.println("? : "+new URL(uri).getPath());
+        System.out.println("? : " + new URL(uri).getPath());
         RepositoryId repositoryId = createFromUrl(uri);
         RepositoryId repositoryId1 = createFromUrl(new URL(uri));
         System.out.println(repositoryId.getOwner());
