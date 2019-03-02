@@ -1,13 +1,13 @@
 package com.econo.hackday.contentsproxyblog.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Post {
 
 	@Id
@@ -19,4 +19,9 @@ public class Post {
 
 	@Column(nullable = false)
 	private String url;
+
+	public Post(String title, String url){
+		this.title = title;
+		this.url = url;
+	}
 }
