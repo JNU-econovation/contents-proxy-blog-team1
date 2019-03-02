@@ -8,8 +8,13 @@ import org.eclipse.egit.github.core.util.EncodingUtils;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GithubMarkdownLoader {
+    //(^[.*]$)6
+    private static final String IMAGE_MARKDOWN_PATTERN = "!\\[(.)+\\]\\((.)+\\)";
+    private static Pattern pattern = Pattern.compile(IMAGE_MARKDOWN_PATTERN);
 
     public static String getContents(String uri) throws IOException {
         String filePath = getFilePath(uri);
@@ -25,5 +30,14 @@ public class GithubMarkdownLoader {
 
     public static String getFilePath(String uri) {
         return uri.split("/blob/master")[1];
+    }
+
+    public static Boolean hasRelativeImage(String imageMarkdown){
+        Matcher matcher = pattern.matcher(imageMarkdown);
+        while (matcher.find()){
+            return true;
+        }
+
+        return false;
     }
 }

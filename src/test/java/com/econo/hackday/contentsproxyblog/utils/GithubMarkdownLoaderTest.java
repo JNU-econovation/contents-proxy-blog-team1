@@ -30,4 +30,16 @@ public class GithubMarkdownLoaderTest {
 
         assertThat(GithubMarkdownLoader.getFilePath(uri)).isEqualTo("/README.md");
     }
+
+    @Test
+    public void hasRelativeImageTest() {
+        //![Alt text](/path/to/img.jpg)
+        String imageMarkdown = "212" +
+                "![Alt text](/path/to/imlg.jpg)\n" +
+                "![Alt text](/path/to/imdg.jpg)\n"+
+                "![Alt text](/path/to/ismg.jpg)\n"+
+                "![Alt text](/path/to/imgx.jpg)\n";
+        assertThat(GithubMarkdownLoader.hasRelativeImage(imageMarkdown))
+                .isEqualTo(true);
+    }
 }
