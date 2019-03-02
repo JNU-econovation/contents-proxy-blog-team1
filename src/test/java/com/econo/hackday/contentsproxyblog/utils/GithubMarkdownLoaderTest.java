@@ -3,6 +3,7 @@ package com.econo.hackday.contentsproxyblog.utils;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,7 +40,16 @@ public class GithubMarkdownLoaderTest {
                 "![Alt text](/path/to/imdg.jpg)\n"+
                 "![Alt text](/path/to/ismg.jpg)\n"+
                 "![Alt text](/path/to/imgx.jpg)\n";
-        assertThat(GithubMarkdownLoader.hasRelativeImage(imageMarkdown))
+        assertThat(GithubMarkdownLoader.hasImage(imageMarkdown))
                 .isEqualTo(true);
+    }
+
+    @Test
+    public void isRelativeImageTest() throws MalformedURLException {
+        String uri = "https://github.com/JNU-econovation/contents-proxy-blog-team1/blob/master/README.md";
+        assertThat(GithubMarkdownLoader.IsRelativeImage(uri)).isEqualTo(false);
+
+        String uri1 = "/JNU-econovation/contents-proxy-blog-team1/blob/master/README.md";
+        assertThat(GithubMarkdownLoader.IsRelativeImage(uri1)).isEqualTo(true);
     }
 }
