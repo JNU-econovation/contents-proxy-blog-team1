@@ -12,7 +12,15 @@ public class PostService {
 	@Autowired
 	private PostRepository postRepository;
 
+	public Iterable<Post> findAll() {
+		return postRepository.findAll();
+	}
+
 	public Post getPostById(Long id) {
 		return postRepository.findById(id).orElseThrow(() -> new NoSuchElementException("해당하는 id의 Post를 찾을 수 없습니다."));
+	}
+
+	public void save(Post post){
+		postRepository.save(post);
 	}
 }

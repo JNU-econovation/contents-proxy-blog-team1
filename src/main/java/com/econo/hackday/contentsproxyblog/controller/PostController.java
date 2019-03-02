@@ -1,5 +1,6 @@
 package com.econo.hackday.contentsproxyblog.controller;
 
+import com.econo.hackday.contentsproxyblog.model.Post;
 import com.econo.hackday.contentsproxyblog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -17,12 +18,14 @@ public class PostController {
     private PostService postService;
 
     @GetMapping("")
-    public String getPosts() {
+    public String getPosts(Model model) {
+        model.addAttribute("posts", postService.findAll());
         return "index";
     }
 
     @PostMapping("")
-    public String createPost() {
+    public String createPost(Post post) {
+        postService.save(post);
         return "redirect:/posts";
     }
 
