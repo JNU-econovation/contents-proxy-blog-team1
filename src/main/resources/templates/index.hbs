@@ -11,6 +11,27 @@
 
     <h1>메인 화면입니다.</h1>
 
+    <table class="table-secondary">
+        <thead>
+        <tr>
+            <th>제목</th>
+            <th>내용</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#posts}}
+        <tr>
+            <td>{{title}}</td>
+            <td>{{url}}</td>
+        </tr>
+        {{/posts}}
+        </tbody>
+    </table>
+
+    <div class="col-md-12">
+        <button type="button" class="btn btn-primary">글 등록</button>
+    </div>
+
     <script src="/js/lib/jquery.min.js"></script>
     <script src="/js/lib/bootstrap.min.js"></script>
 </body>
