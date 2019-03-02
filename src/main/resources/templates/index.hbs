@@ -12,14 +12,12 @@
         <thead>
         <tr>
             <th>제목</th>
-            <th>내용</th>
         </tr>
         </thead>
         <tbody>
         {{#posts}}
         <tr>
-            <td>{{title}}</td>
-            <td>{{url}}</td>
+            <td><a href="/posts/{{id}}">{{title}}</a></td>
         </tr>
         {{/posts}}
         </tbody>

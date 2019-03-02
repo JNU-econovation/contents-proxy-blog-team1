@@ -26,7 +26,7 @@ public class PostController {
     @PostMapping("")
     public String createPost(Post post) {
         postService.save(post);
-        return "index";
+        return "redirect:/posts";
     }
 
     @GetMapping("/{id}")
