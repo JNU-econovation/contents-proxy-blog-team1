@@ -12,10 +12,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -56,5 +59,13 @@ public class PostControllerTest {
 				.andExpect(model().attribute("posts", IsCollectionWithSize.hasSize(2)))
 				.andDo(print());
 		assertThat(postService.findAll()).contains(post1).contains(post2);
+	}
+
+	@Test
+	public void POST_Posts() throws Exception{
+		mockMvc.perform(post("/posts"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("posts"))
+				.andDo(print());
 	}
 }
