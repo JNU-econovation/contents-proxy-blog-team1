@@ -32,7 +32,7 @@ public class PostControllerTest {
 	@MockBean
 	private PostService postService;
 
-	@Test
+	@Test 
 	public void GET_Posts_Id() throws Exception {
 		when(postService.getPostById(1L)).thenReturn(new Post("title1", "url1"));
 		mockMvc.perform(get("/posts/1"))
@@ -41,7 +41,7 @@ public class PostControllerTest {
 				.andExpect(model().attributeExists("post"))
 				.andDo(print());
 		assertThat(postService.getPostById(1L).getUrl()).isEqualTo("url1");
-	}
+	} 
 
 	@Test
 	public void GET_Posts() throws Exception {
@@ -67,5 +67,5 @@ public class PostControllerTest {
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/posts"))
 				.andDo(print());
-	}
+	} 
 }
