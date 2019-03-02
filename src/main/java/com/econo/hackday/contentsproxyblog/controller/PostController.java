@@ -17,7 +17,8 @@ public class PostController {
     private PostService postService;
 
     @GetMapping("")
-    public String getPosts() {
+    public String getPosts(Model model) {
+        model.addAttribute("posts", postService.get)
         return "index";
     }
 

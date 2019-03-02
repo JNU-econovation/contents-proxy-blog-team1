@@ -2,8 +2,8 @@ package com.econo.hackday.contentsproxyblog.utils.controller;
 
 import com.econo.hackday.contentsproxyblog.controller.PostController;
 import com.econo.hackday.contentsproxyblog.model.Post;
+import com.econo.hackday.contentsproxyblog.repository.PostRepository;
 import com.econo.hackday.contentsproxyblog.service.PostService;
-import org.hamcrest.collection.IsCollectionWithSize;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
