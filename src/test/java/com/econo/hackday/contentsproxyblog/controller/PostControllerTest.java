@@ -65,7 +65,7 @@ public class PostControllerTest {
 	public void POST_Posts() throws Exception{
 		mockMvc.perform(post("/posts"))
 				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("posts"))
+				.andExpect(redirectedUrl("/posts"))
 				.andDo(print());
 	}
 }
