@@ -10,7 +10,22 @@
 <body>
 
 markdown -> html 컨버팅 부분 구현 및 프론트 설계 필요..
-
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>제목</th>
+        <th>내용</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#post}}
+        <tr>
+            <td>{{title}}</td>
+            <td>{{url}}</td>
+        </tr>
+    {{/post}}
+    </tbody>
+</table>
 <script src="/js/lib/jquery.min.js"></script>
 <script src="/js/lib/bootstrap.min.js"></script>
 </body>

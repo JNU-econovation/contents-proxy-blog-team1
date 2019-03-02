@@ -1,8 +1,6 @@
-package com.econo.hackday.contentsproxyblog.utils.controller;
+package com.econo.hackday.contentsproxyblog.controller;
 
-import com.econo.hackday.contentsproxyblog.controller.PostController;
 import com.econo.hackday.contentsproxyblog.model.Post;
-import com.econo.hackday.contentsproxyblog.repository.PostRepository;
 import com.econo.hackday.contentsproxyblog.service.PostService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
