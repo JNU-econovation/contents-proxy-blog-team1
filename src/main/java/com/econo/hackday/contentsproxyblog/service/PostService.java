@@ -28,4 +28,8 @@ public class PostService {
 
 		return MarkdownParser.convert(GithubMarkdownLoader.getContents(url));
 	}
+
+	public void save(Post post) {
+		postRepository.save(post);
+	}
 }
