@@ -33,4 +33,8 @@ public class Account {
 		this.password = password;
 		this.email = email;
 	}
+
+	public boolean match(String password) {
+		return this.password.equals(password);
+	}
 }
