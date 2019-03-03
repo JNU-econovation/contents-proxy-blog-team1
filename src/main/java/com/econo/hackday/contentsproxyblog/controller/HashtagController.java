@@ -23,9 +23,9 @@ public class HashtagController {
 	}
 
 	@PostMapping("")
-	public String createPost(HashtagSaveDto hashtagSaveDto, HttpSession httpSession) {
-		System.out.println(hashtagSaveDto.getName());
+	public String createPost(HashtagSaveDto hashtagSaveDto) {
 		hashtagRepository.save(hashtagSaveDto.toEntity());
+
 		return "redirect:/";
 	}
 

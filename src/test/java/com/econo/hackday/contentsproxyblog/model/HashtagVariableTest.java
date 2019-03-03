@@ -10,10 +10,11 @@ public class HashtagVariableTest {
 	HashtagVariable hashtagVariable;
 
 	@Before
-	public void init(){
-		hashtagVariable= new HashtagVariable();
+	public void init() {
+		hashtagVariable = new HashtagVariable();
 		hashtagVariable.setHashtag(new Hashtag(0l, "일상"));
 	}
+
 	@Test
 	public void match() {
 		assertThat(hashtagVariable.match("일상")).isEqualTo(true);

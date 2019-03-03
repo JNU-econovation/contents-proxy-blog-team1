@@ -1,7 +1,6 @@
 package com.econo.hackday.contentsproxyblog.controller;
 
 import com.econo.hackday.contentsproxyblog.dto.PostSaveRequestDto;
-import com.econo.hackday.contentsproxyblog.model.Hashtag;
 import com.econo.hackday.contentsproxyblog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,9 +24,9 @@ public class PostController {
 		return "post/index";
 	}
 
-	@GetMapping(value = "", params = {"tagName"})
-	public String getFilteredPosts(Model model, @RequestParam String tagName) {
-		model.addAttribute("posts", postService.findAllByHashtag(tagName));
+	@GetMapping(value = "", params = {"hashtag"})
+	public String getFilteredPosts(Model model, @RequestParam String hashtag) {
+		model.addAttribute("posts", postService.findAllByHashtag(hashtag));
 		return "post/index";
 	}
 
