@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>contents-proxy-blog-team1</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
 </head>
@@ -15,6 +15,7 @@
         <th>제목</th>
         <th>내용</th>
         <th>작성자</th>
+        <th>조회수</th>
     </tr>
     </thead>
     <tbody>
@@ -23,10 +24,16 @@
             <td>{{title}}</td>
             <td>{{{contents}}}</td>
             <td>{{writer.name}}</td>
+            <td>{{viewCount}}</td>
         </tr>
     {{/post}}
     </tbody>
 </table>
+
+</div>
+<div class="col-md-3">
+    <a href="/posts" class="btn btn-primary pull-right" role="button">글목록</a>
+</div>
 <script src="/js/lib/jquery.min.js"></script>
 <script src="/js/lib/bootstrap.min.js"></script>
 </body>

@@ -29,10 +29,17 @@ public class Post {
 	@ManyToOne
 	private Account writer;
 
+	private Long viewCount;
+
 	@Builder
 	public Post(String title, String url, Account writer) {
 		this.title = title;
 		this.url = url;
 		this.writer = writer;
+		this.viewCount = 0l;
+	}
+
+	public void increaseViewCount() {
+		this.viewCount++;
 	}
 }

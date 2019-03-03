@@ -12,12 +12,16 @@
         <thead>
         <tr>
             <th>제목</th>
+            <th>작성자</th>
+            <th>조회수</th>
         </tr>
         </thead>
         <tbody>
         {{#posts}}
         <tr>
             <td><a href="/posts/{{id}}">{{title}}</a></td>
+            <td>{{writer.name}}</td>
+            <td>{{viewCount}}</td>
         </tr>
         {{/posts}}
         </tbody>
