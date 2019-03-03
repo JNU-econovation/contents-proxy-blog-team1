@@ -6,8 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post {
 
 	@Id
@@ -20,8 +19,13 @@ public class Post {
 	@Column(nullable = false)
 	private String url;
 
-	public Post(String title, String url){
+	@ManyToOne
+	private Account writer;
+
+	@Builder
+	public Post(String title, String url, Account writer){
 		this.title = title;
 		this.url = url;
+		this.writer = writer;
 	}
 }

@@ -19,7 +19,6 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 
-
 	@PostMapping("")
 	public String signUp(AccountSaveRequestDto accountSaveRequestDto) {
 		accountService.save(accountSaveRequestDto);
@@ -35,7 +34,7 @@ public class AccountController {
 	public String login(String accountId, String password, HttpSession httpSession) {
 		Account account = accountService.findByAccountId(accountId);
 
-		if(!account.match(password)) {
+		if (!account.match(password)) {
 			throw new RuntimeException("password mismatch");
 		}
 

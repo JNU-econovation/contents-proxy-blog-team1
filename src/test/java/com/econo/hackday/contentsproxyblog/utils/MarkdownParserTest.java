@@ -10,8 +10,11 @@ public class MarkdownParserTest {
 	public void convertTest() {
 		String html = MarkdownParser.convert("This is *Sparta*");
 		assertThat(html).isEqualTo("<p>This is <em>Sparta</em></p>\n");
+	}
 
-		html = MarkdownParser.convert("hello\nworld");
+	@Test
+	public void convertTest_2() {
+		String html = MarkdownParser.convert("hello\nworld");
 		assertThat(html).isEqualTo("<p>hello<br/>world</p>\n");
 	}
 }
