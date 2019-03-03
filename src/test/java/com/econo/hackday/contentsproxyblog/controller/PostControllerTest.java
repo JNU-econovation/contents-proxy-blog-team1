@@ -12,8 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -32,29 +30,43 @@ public class PostControllerTest {
 	@MockBean
 	private PostService postService;
 
-	@Test 
+	@Test
 	public void GET_Posts_Id() throws Exception {
-		when(postService.getPostById(1L)).thenReturn(new Post("title1", "url1"));
+		when(postService.getPostById(1L)).thenReturn(Post.builder()
+				.title("title1")
+				.url("url1")
+				.writer(null)
+				.build());
+
 		mockMvc.perform(get("/posts/1"))
 				.andExpect(status().isOk())
-				.andExpect(view().name("show"))
+				.andExpect(view().name("post/show"))
 				.andExpect(model().attributeExists("post"))
 				.andDo(print());
 		assertThat(postService.getPostById(1L).getUrl()).isEqualTo("url1");
-	} 
+	}
 
 	@Test
 	public void GET_Posts() throws Exception {
-		Post post1 = new Post("title1", "url1");
-		Post post2 = new Post("title2", "url2");
+		Post post1 = Post.builder()
+				.title("title1")
+				.url("url1")
+				.writer(null)
+				.build();
+		Post post2 = Post.builder()
+				.title("title2")
+				.url("url2")
+				.writer(null)
+				.build();
 		Post[] posts = {
-				post1,
-				post2
+				post1, post2
 		};
+
 		when(postService.findAll()).thenReturn(Arrays.asList(posts));
+
 		mockMvc.perform(get("/posts"))
 				.andExpect(status().isOk())
-				.andExpect(view().name("index"))
+				.andExpect(view().name("post/index"))
 				.andExpect(model().attributeExists("posts"))
 				.andExpect(model().attribute("posts", IsCollectionWithSize.hasSize(2)))
 				.andDo(print());
@@ -62,10 +74,10 @@ public class PostControllerTest {
 	}
 
 	@Test
-	public void POST_Posts() throws Exception{
+	public void POST_Posts() throws Exception {
 		mockMvc.perform(post("/posts"))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/posts"))
 				.andDo(print());
-	} 
+	}
 }

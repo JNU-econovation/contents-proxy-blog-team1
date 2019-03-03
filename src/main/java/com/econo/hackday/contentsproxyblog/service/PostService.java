@@ -1,17 +1,21 @@
 package com.econo.hackday.contentsproxyblog.service;
 
+import com.econo.hackday.contentsproxyblog.dto.PostSaveRequestDto;
 import com.econo.hackday.contentsproxyblog.model.Post;
 import com.econo.hackday.contentsproxyblog.repository.PostRepository;
 import com.econo.hackday.contentsproxyblog.utils.GithubMarkdownLoader;
+import com.econo.hackday.contentsproxyblog.utils.HttpSessionUtil;
 import com.econo.hackday.contentsproxyblog.utils.MarkdownParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
 @Service
 public class PostService {
+
 	@Autowired
 	private PostRepository postRepository;
 
@@ -26,10 +30,11 @@ public class PostService {
 	public String getHtml(Long id) throws IOException {
 		String url = getPostById(id).getUrl();
 
-		return MarkdownParser.convert(GithubMarkdownLoader.getContents(url));
+		return MarkdownParser.convert(GithubMarkdownLoader.getContentsWithImages(url));
 	}
 
-	public void save(Post post) {
-		postRepository.save(post);
+	public void save(PostSaveRequestDto postSaveRequestDto, HttpSession httpSession) {
+		postSaveRequestDto.setWriter(HttpSessionUtil.getSessionedAccount(httpSession));
+		postRepository.save(postSaveRequestDto.toEntity());
 	}
 }

@@ -7,8 +7,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post {
 
 	@Id
@@ -24,8 +23,13 @@ public class Post {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
 	private List<HashtagVariable> hashtags;
 
-	public Post(String title, String url){
+	@ManyToOne
+	private Account writer;
+
+	@Builder
+	public Post(String title, String url, Account writer){
 		this.title = title;
 		this.url = url;
+		this.writer = writer;
 	}
 }
