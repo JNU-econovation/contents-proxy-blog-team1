@@ -31,6 +31,19 @@
         <div class="col-md-3">
             <a href="/posts/form" class="btn btn-primary pull-right" role="button">글등록</a>
         </div>
+        <div class="col-md-3">
+            <a href="/accounts/form" class="btn btn-primary pull-right" role="button">회원가입</a>
+        </div>
+        {{^sessionedAccount}}
+            <div class="col-md-3">
+                <a href="/accounts/login" class="btn btn-primary pull-right" role="button">로그인</a>
+            </div>
+        {{/sessionedAccount}}
+        {{#sessionedAccount}}
+            <div class="col-md-3">
+                <a href="/accounts/logout" class="btn btn-primary pull-right" role="button">로그아웃</a>
+            </div>
+        {{/sessionedAccount}}
     </div>
 
     <script src="/js/lib/jquery.min.js"></script>
