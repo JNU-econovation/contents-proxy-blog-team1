@@ -37,4 +37,10 @@ public class PostService {
 		postSaveRequestDto.setWriter(HttpSessionUtil.getSessionedAccount(httpSession));
 		postRepository.save(postSaveRequestDto.toEntity());
 	}
+
+	public void increaseViewCount(Long id) {
+		Post post = this.getPostById(id);
+		post.increaseViewCount();
+		postRepository.save(post);
+	}
 }

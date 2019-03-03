@@ -35,6 +35,7 @@ public class PostController {
 
 	@GetMapping("/{id}")
 	public String getPostDetail(@PathVariable Long id, Model model) throws IOException {
+		postService.increaseViewCount(id);
 		model.addAttribute("post", postService.getPostById(id));
 		model.addAttribute("contents", postService.getHtml(id));
 		return "post/show";
