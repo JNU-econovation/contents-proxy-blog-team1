@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ImagePathConverterTest {
 
 	@Test
-	public void hasRelativeImageTest() {
+	public void hasImageTest() {
 		String imageMarkdown = "212" +
 				"![Alt text](/path/to/imlg.jpg)\n" +
 				"![Alt text](/path/to/imdg.jpg)\n"+
@@ -34,9 +34,8 @@ public class ImagePathConverterTest {
 	public void convertRelativeToAbsolute() {
 		String uri = "https://github.com/JNU-econovation/markdown-study/blob/master/picture/economark.jpg?raw=true";
 
-		String imageMarkdown = "212" +
-				"![Alt text](path/to/imgx.jpg)";
-		assertThat(ImagePathConverter.convertRlativeUrisToAbsolute(imageMarkdown, GithubMarkdownLoader.getInfoPath(uri)))
+		String imageMarkdown = "212 ![Alt text](path/to/imgx.jpg)";
+		assertThat(ImagePathConverter.convertRelativeUrisToAbsolute(imageMarkdown, GithubMarkdownLoader.getInfoPath(uri)))
 				.isEqualTo("212![Alt text](https://github.com/JNU-econovation/markdown-study/blob/master/path/to/imgx.jpg?raw=true)");
 	}
 

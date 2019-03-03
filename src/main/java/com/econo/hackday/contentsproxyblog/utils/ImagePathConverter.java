@@ -9,7 +9,7 @@ public class ImagePathConverter {
 
 	static final String RAW_PARAM = "?raw=true";
 	static final String IMAGE_MARKDOWN_PATTERN = "!\\[(.)+\\]\\((.)+\\)";
-	static final String IMAGE_URI_PATTERN = "[^\\(]+\\.(jpg|png|jpen|bmp)";
+	static final String IMAGE_URI_PATTERN = "[^\\(]+\\.(jpg|png|jpeg|bmp|gif|svg)";
 
 	private static Pattern imageMarkdownPattern = Pattern.compile(IMAGE_MARKDOWN_PATTERN);
 	private static Pattern imageUriPattern = Pattern.compile(IMAGE_URI_PATTERN);
@@ -31,7 +31,7 @@ public class ImagePathConverter {
 		return false;
 	}
 
-	public static String convertRlativeUrisToAbsolute(String markdownContents, String infoPath) {
+	public static String convertRelativeUrisToAbsolute(String markdownContents, String infoPath) {
 		Matcher matcher = imageMarkdownPattern.matcher(markdownContents);
 		StringBuffer replacedString = new StringBuffer();
 
@@ -45,6 +45,8 @@ public class ImagePathConverter {
 
 	public static String toAbsoluteImagePath(String imageMarkdown, String infoPath) {
 		Matcher matcher = imageUriPattern.matcher(imageMarkdown);
+		System.out.println("이미지:" + imageMarkdown);
+		System.out.println("infopath: " + infoPath);
 		StringBuffer replacedString = new StringBuffer();
 		StringBuilder filePath = new StringBuilder("");
 

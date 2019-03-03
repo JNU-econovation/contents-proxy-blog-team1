@@ -17,7 +17,7 @@ public class GithubMarkdownLoader {
 	private static final String PATH_SPLITTER = "/blob/master";
 
     public static String getContentsWithImages(String uri) throws IOException {
-		return ImagePathConverter.convertRlativeUrisToAbsolute(getContents(uri), getInfoPath(uri));
+		return ImagePathConverter.convertRelativeUrisToAbsolute(getContents(uri), getInfoPath(uri));
 	}
 
     public static String getContents(String uri) throws IOException {
