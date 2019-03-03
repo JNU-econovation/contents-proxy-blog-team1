@@ -1,6 +1,7 @@
 package com.econo.hackday.contentsproxyblog.service;
 
 import com.econo.hackday.contentsproxyblog.dto.PostSaveRequestDto;
+import com.econo.hackday.contentsproxyblog.model.Hashtag;
 import com.econo.hackday.contentsproxyblog.model.Post;
 import com.econo.hackday.contentsproxyblog.repository.PostRepository;
 import com.econo.hackday.contentsproxyblog.utils.GithubMarkdownLoader;
@@ -42,5 +43,9 @@ public class PostService {
 		Post post = this.getPostById(id);
 		post.increaseViewCount();
 		postRepository.save(post);
+	}
+
+	public Iterable<Hashtag> findHashtags() {
+		return postRepository.findHashtags();
 	}
 }

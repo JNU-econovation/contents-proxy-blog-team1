@@ -42,7 +42,8 @@ public class PostController {
 	}
 
 	@GetMapping("/form")
-	public String getPostForm() {
+	public String getPostForm(Model model) {
+		model.addAttribute("hashtags", postService.findHashtags());
 		return "post/form";
 	}
 
