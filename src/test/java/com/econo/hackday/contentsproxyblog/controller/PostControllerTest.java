@@ -8,12 +8,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -75,9 +77,16 @@ public class PostControllerTest {
 
 	@Test
 	public void POST_Posts() throws Exception {
-		mockMvc.perform(post("/posts"))
+//		mockMvc.perform(post("/posts"))
+//				.andExpect(status().is3xxRedirection())
+//				.andExpect(redirectedUrl("/posts"))
+//				.andDo(print());
+
+		mockMvc.perform(post("/posts")
+				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+				.param("hashtags", "a")
+				.param("hashtags", "b"))
 				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/posts"))
 				.andDo(print());
 	}
 }
