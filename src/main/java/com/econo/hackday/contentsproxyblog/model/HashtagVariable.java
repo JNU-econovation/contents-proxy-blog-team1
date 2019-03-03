@@ -25,7 +25,7 @@ public class HashtagVariable {
 	@NonNull
 	private Post post;
 
-	public boolean match(String tagName){
+	public boolean match(String tagName) {
 		return this.hashtag.getName().equals(tagName);
 	}
 

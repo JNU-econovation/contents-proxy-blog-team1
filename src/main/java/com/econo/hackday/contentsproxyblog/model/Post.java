@@ -43,9 +43,9 @@ public class Post {
 		this.viewCount++;
 	}
 
-	public boolean hasTag(String tagName){
-		for(HashtagVariable hashtagVariable : hashtagVariables){
-			if(hashtagVariable.getHashtag().getName().equals(tagName)){
+	public boolean hasTag(String tagName) {
+		for (HashtagVariable hashtagVariable : hashtagVariables) {
+			if (hashtagVariable.getHashtag().getName().equals(tagName)) {
 				return true;
 			}
 		}

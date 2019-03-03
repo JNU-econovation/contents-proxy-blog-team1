@@ -1,9 +1,14 @@
 package com.econo.hackday.contentsproxyblog.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 @Getter
@@ -18,8 +23,4 @@ public class Hashtag {
 
 	@Column(nullable = false)
 	private String name;
-//
-//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "hashtag")
-//	private List<HashtagVariable> HashtagVariable;
-
 }
