@@ -17,11 +17,11 @@ public class HashtagVariable {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name ="hashtag_id")
+	@JoinColumn(name = "hashtag_id")
 	private Hashtag hashtag;
 
 	@ManyToOne
 	@JoinColumn(name = "post_id")
-	private  Post post;
+	private Post post;
 
 }

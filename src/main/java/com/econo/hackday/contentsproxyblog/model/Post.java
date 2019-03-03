@@ -1,6 +1,9 @@
 package com.econo.hackday.contentsproxyblog.model;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,7 +30,7 @@ public class Post {
 	private Account writer;
 
 	@Builder
-	public Post(String title, String url, Account writer){
+	public Post(String title, String url, Account writer) {
 		this.title = title;
 		this.url = url;
 		this.writer = writer;
