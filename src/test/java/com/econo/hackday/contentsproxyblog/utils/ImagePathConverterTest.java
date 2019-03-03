@@ -11,7 +11,6 @@ public class ImagePathConverterTest {
 
 	@Test
 	public void hasRelativeImageTest() {
-		//![Alt text](/path/to/img.jpg)
 		String imageMarkdown = "212" +
 				"![Alt text](/path/to/imlg.jpg)\n" +
 				"![Alt text](/path/to/imdg.jpg)\n"+
@@ -24,20 +23,30 @@ public class ImagePathConverterTest {
 
 	@Test
 	public void isRelativeImageTest() throws MalformedURLException {
-		String uri = "https://github.com/JNU-econovation/contents-proxy-blog-team1/blob/master/README.md";
+		StringBuilder uri = new StringBuilder("https://github.com/JNU-econovation/contents-proxy-blog-team1/blob/master/README.md");
 		assertThat(ImagePathConverter.isRelativeImage(uri)).isEqualTo(false);
 
-		String uri1 = "/JNU-econovation/contents-proxy-blog-team1/blob/master/README.md";
+		StringBuilder uri1 = new StringBuilder("/JNU-econovation/contents-proxy-blog-team1/blob/master/README.md");
 		assertThat(ImagePathConverter.isRelativeImage(uri1)).isEqualTo(true);
 	}
 
 	@Test
-	public void convertRlativeToAbsolute() {
+	public void convertRelativeToAbsolute() {
 		String uri = "https://github.com/JNU-econovation/markdown-study/blob/master/picture/economark.jpg?raw=true";
 
 		String imageMarkdown = "212" +
 				"![Alt text](path/to/imgx.jpg)";
 		assertThat(ImagePathConverter.convertRlativeUrisToAbsolute(imageMarkdown, GithubMarkdownLoader.getInfoPath(uri)))
 				.isEqualTo("212![Alt text](https://github.com/JNU-econovation/markdown-study/blob/master/path/to/imgx.jpg?raw=true)");
+	}
+
+	@Test
+	public void toAbsoluteImagePathTest(){
+		String infoPath = "https://github.com/JNU-econovation/markdown-study/blob/master";
+		String imageMarkdown= "![Alt text](path/to/imgx.jpg)";
+		String expectedAnswer = "![Alt text](https://github.com/JNU-econovation/markdown-study/blob/master/path/to/imgx.jpg?raw=true)";
+
+		assertThat(ImagePathConverter.toAbsoluteImagePath(imageMarkdown,infoPath)).isEqualTo(expectedAnswer);
+
 	}
 }
