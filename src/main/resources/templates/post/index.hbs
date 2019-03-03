@@ -14,6 +14,7 @@
             <th>제목</th>
             <th>작성자</th>
             <th>조회수</th>
+            <th>태그</th>
         </tr>
         </thead>
         <tbody>
@@ -22,6 +23,12 @@
             <td><a href="/posts/{{id}}">{{title}}</a></td>
             <td>{{writer.name}}</td>
             <td>{{viewCount}}</td>
+
+            <td>
+            {{#hashtagVariables}}
+                <a href="#">#{{hashtag.name}} &nbsp</a>
+            {{/hashtagVariables}}
+            </td>
         </tr>
         {{/posts}}
         </tbody>

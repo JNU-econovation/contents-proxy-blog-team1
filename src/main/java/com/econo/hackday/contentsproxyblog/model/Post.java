@@ -24,7 +24,7 @@ public class Post {
 	private String url;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-	private List<HashtagVariable> HashtagVariables;
+	private List<HashtagVariable> hashtagVariables;
 
 	@ManyToOne
 	private Account writer;
