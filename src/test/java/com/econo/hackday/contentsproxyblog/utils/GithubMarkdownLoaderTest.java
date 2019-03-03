@@ -11,16 +11,16 @@ public class GithubMarkdownLoaderTest {
 
     @Test
     public void getContentsTest() throws IOException {
-        String uri = "https://github.com/JNU-econovation/contents-proxy-blog-team1/blob/master/README.md";
-        String answer = "## 기술 스택\n" +
-                "- Java 11\n" +
-                "- Web tier : Spring Boot (+ Spring Web MVC)\n" +
-                "- Perstence layer : JPA (Hibernate)\n" +
-                "- github 연동 : [egit-github](https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core)\n" +
-                "- markdown -> html 렌더링\n" +
-                "    - 서버에서 할 경우 : [flexmark-java](https://github.com/vsch/flexmark-java)\n" +
-                "    - 클라이언트에서 할 경우 : [markdown-it](https://github.com/markdown-it/markdown-it)\n" +
-                "- DB : H2db\n\n";
+		String uri = "https://github.com/JNU-econovation/contents-proxy-blog-team1/blob/master/README.md";
+		String answer = "## 기술 스택\n" +
+				"- Java 11\n" +
+				"- Web tier : Spring Boot (+ Spring Web MVC)\n" +
+				"- Perstence layer : JPA (Hibernate)\n" +
+				"- github 연동 : [egit-github](https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core)\n" +
+				"- markdown -> html 렌더링\n" +
+				"    - 서버에서 할 경우 : [flexmark-java](https://github.com/vsch/flexmark-java)\n" +
+				"    - 클라이언트에서 할 경우 : [markdown-it](https://github.com/markdown-it/markdown-it)\n" +
+				"- DB : H2db\n\n";
 
         assertThat(GithubMarkdownLoader.getContents(uri)).contains(answer);
     }
@@ -33,34 +33,10 @@ public class GithubMarkdownLoaderTest {
     }
 
     @Test
-    public void hasRelativeImageTest() {
-        //![Alt text](/path/to/img.jpg)
-        String imageMarkdown = "212" +
-                "![Alt text](/path/to/imlg.jpg)\n" +
-                "![Alt text](/path/to/imdg.jpg)\n"+
-                "![Alt text](/path/to/ismg.jpg)\n"+
-                "![Alt text](/path/to/imgx.jpg)\n"+
-                "ekf dekdenasdw";
-        assertThat(GithubMarkdownLoader.hasImage(imageMarkdown))
-                .isEqualTo(true);
-    }
-
-    @Test
-    public void isRelativeImageTest() throws MalformedURLException {
+    public void getInfoPath() {
         String uri = "https://github.com/JNU-econovation/contents-proxy-blog-team1/blob/master/README.md";
-        assertThat(GithubMarkdownLoader.isRelativeImage(uri)).isEqualTo(false);
-
-        String uri1 = "/JNU-econovation/contents-proxy-blog-team1/blob/master/README.md";
-        assertThat(GithubMarkdownLoader.isRelativeImage(uri1)).isEqualTo(true);
+        String expectedInfoPath = "https://github.com/JNU-econovation/contents-proxy-blog-team1";
+        assertThat(GithubMarkdownLoader.getInfoPath(uri)).isEqualTo(expectedInfoPath);
     }
 
-    @Test
-    public void convertRlativeToAbsolute() {
-        String uri = "https://github.com/JNU-econovation/markdown-study/blob/master/picture/economark.jpg?raw=true";
-
-        String imageMarkdown = "212" +
-                "![Alt text](path/to/imgx.jpg)";
-        assertThat(GithubMarkdownLoader.convertRlativeUrisToAbsolute(imageMarkdown, GithubMarkdownLoader.getInfoPath(uri)))
-                .isEqualTo("212![Alt text](https://github.com/JNU-econovation/markdown-study/blob/master/path/to/imgx.jpg?raw=true)");
-    }
 }
