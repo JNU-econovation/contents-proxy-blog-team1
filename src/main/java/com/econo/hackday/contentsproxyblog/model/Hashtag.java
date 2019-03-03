@@ -19,6 +19,6 @@ public class Hashtag {
 	private Long id;
 
 	@Column(nullable = false)
-	private String tagName;
+	private String name;
 
 }
