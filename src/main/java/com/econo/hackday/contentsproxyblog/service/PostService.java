@@ -26,7 +26,7 @@ public class PostService {
 	public String getHtml(Long id) throws IOException {
 		String url = getPostById(id).getUrl();
 
-		return MarkdownParser.convert(GithubMarkdownLoader.getContents(url));
+		return MarkdownParser.convert(GithubMarkdownLoader.getContentsWithImages(url));
 	}
 
 	public void save(Post post) {
