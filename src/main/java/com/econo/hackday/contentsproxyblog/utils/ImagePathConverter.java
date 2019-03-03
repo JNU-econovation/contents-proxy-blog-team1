@@ -1,5 +1,7 @@
 package com.econo.hackday.contentsproxyblog.utils;
 
+import com.econo.hackday.contentsproxyblog.exception.UndefinedImageExtension;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.regex.Matcher;
@@ -45,19 +47,20 @@ public class ImagePathConverter {
 
 	public static String toAbsoluteImagePath(String imageMarkdown, String infoPath) {
 		Matcher matcher = imageUriPattern.matcher(imageMarkdown);
-		System.out.println("이미지:" + imageMarkdown);
-		System.out.println("infopath: " + infoPath);
 		StringBuffer replacedString = new StringBuffer();
 		StringBuilder filePath = new StringBuilder("");
 
 		if (matcher.find()) {
 			filePath.append(matcher.group());
 		}
+		if (filePath.toString().equals("")) {
+			throw new UndefinedImageExtension(imageMarkdown);
+		}
 		if (!isRelativeImage(filePath)) {
 			return imageMarkdown;
 		}
-		if(filePath.charAt(0)!= '/'){
-			filePath.insert(0,"/");
+		if (filePath.charAt(0) != '/') {
+			filePath.insert(0, "/");
 		}
 		matcher.appendReplacement(replacedString,
 				new StringBuilder(infoPath).append(filePath).append(RAW_PARAM).toString());

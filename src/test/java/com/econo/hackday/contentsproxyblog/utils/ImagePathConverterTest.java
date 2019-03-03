@@ -13,9 +13,9 @@ public class ImagePathConverterTest {
 	public void hasImageTest() {
 		String imageMarkdown = "212" +
 				"![Alt text](/path/to/imlg.jpg)\n" +
-				"![Alt text](/path/to/imdg.jpg)\n"+
-				"![Alt text](/path/to/ismg.jpg)\n"+
-				"![Alt text](/path/to/imgx.jpg)\n"+
+				"![Alt text](/path/to/imdg.jpg)\n" +
+				"![Alt text](/path/to/ismg.jpg)\n" +
+				"![Alt text](/path/to/imgx.jpg)\n" +
 				"ekf dekdenasdw";
 		assertThat(ImagePathConverter.hasImage(imageMarkdown))
 				.isEqualTo(true);
@@ -40,12 +40,12 @@ public class ImagePathConverterTest {
 	}
 
 	@Test
-	public void toAbsoluteImagePathTest(){
+	public void toAbsoluteImagePathTest() {
 		String infoPath = "https://github.com/JNU-econovation/markdown-study/blob/master";
-		String imageMarkdown= "![Alt text](path/to/imgx.jpg)";
+		String imageMarkdown = "![Alt text](path/to/imgx.jpg)";
 		String expectedAnswer = "![Alt text](https://github.com/JNU-econovation/markdown-study/blob/master/path/to/imgx.jpg?raw=true)";
 
-		assertThat(ImagePathConverter.toAbsoluteImagePath(imageMarkdown,infoPath)).isEqualTo(expectedAnswer);
+		assertThat(ImagePathConverter.toAbsoluteImagePath(imageMarkdown, infoPath)).isEqualTo(expectedAnswer);
 
 	}
 }
