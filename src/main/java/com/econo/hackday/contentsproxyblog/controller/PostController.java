@@ -22,7 +22,7 @@ public class PostController {
 	@GetMapping("")
 	public String getPosts(Model model) {
 		model.addAttribute("posts", postService.findAll());
-		return "index";
+		return "post/index";
 	}
 
 	@PostMapping("")
@@ -35,12 +35,12 @@ public class PostController {
 	public String getPostDetail(@PathVariable Long id, Model model) throws IOException {
 		model.addAttribute("post", postService.getPostById(id));
 		model.addAttribute("contents", postService.getHtml(id));
-		return "show";
+		return "post/show";
 	}
 
 	@GetMapping("/form")
 	public String getPostForm() {
-		return "form";
+		return "post/form";
 	}
 
 }
