@@ -24,7 +24,7 @@ public class Post {
 	private String url;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-	private List<HashtagVariable> hashtagVariables;
+	public List<HashtagVariable> hashtagVariables;
 
 	@ManyToOne
 	private Account writer;
@@ -41,5 +41,14 @@ public class Post {
 
 	public void increaseViewCount() {
 		this.viewCount++;
+	}
+
+	public boolean hasTag(String tagName){
+		for(HashtagVariable hashtagVariable : hashtagVariables){
+			if(hashtagVariable.getHashtag().getName().equals(tagName)){
+				return true;
+			}
+		}
+		return false;
 	}
 }

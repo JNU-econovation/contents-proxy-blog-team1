@@ -25,11 +25,16 @@ public class PostController {
 		return "post/index";
 	}
 
+	@GetMapping(value = "", params = {"tagName"})
+	public String getFilteredPosts(Model model, @RequestParam String tagName) {
+		model.addAttribute("posts", postService.findAllByHashtag(tagName));
+		return "post/index";
+	}
+
 	@PostMapping("")
 	public String createPost(PostSaveRequestDto postSaveRequestDto,
 							 HttpSession httpSession,
 							 @RequestParam(value = "hashtags", defaultValue = "false") List<String> hashtags) {
-		System.out.println(postSaveRequestDto);
 		postService.save(postSaveRequestDto, httpSession, hashtags);
 		return "redirect:/posts";
 	}

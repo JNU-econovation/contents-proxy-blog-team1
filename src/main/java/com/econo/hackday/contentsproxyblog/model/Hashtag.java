@@ -18,8 +18,8 @@ public class Hashtag {
 
 	@Column(nullable = false)
 	private String name;
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "hashtag")
-	private List<HashtagVariable> HashtagVariable;
+//
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "hashtag")
+//	private List<HashtagVariable> HashtagVariable;
 
 }

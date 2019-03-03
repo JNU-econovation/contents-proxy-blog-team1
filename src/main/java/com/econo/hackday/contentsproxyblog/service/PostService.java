@@ -32,6 +32,12 @@ public class PostService {
 		return postRepository.findAll();
 	}
 
+	public Iterable<Post> findAllByHashtag(String tagName){
+		return postRepository.findAll().stream()
+				.filter(post->post.hasTag(tagName))
+				.collect(Collectors.toList());
+	}
+
 	public Post getPostById(Long id) {
 		return postRepository.findById(id).orElseThrow(() -> new NoSuchElementException("해당하는 id의 Post를 찾을 수 없습니다."));
 	}
