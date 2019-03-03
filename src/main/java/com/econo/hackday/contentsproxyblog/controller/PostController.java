@@ -1,7 +1,6 @@
 package com.econo.hackday.contentsproxyblog.controller;
 
 import com.econo.hackday.contentsproxyblog.dto.PostSaveRequestDto;
-import com.econo.hackday.contentsproxyblog.model.Post;
 import com.econo.hackday.contentsproxyblog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
