@@ -1,8 +1,6 @@
 package com.econo.hackday.contentsproxyblog.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,18 +8,21 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class HashtagVariable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "hashtag_id")
+	@NonNull
 	private Hashtag hashtag;
 
 	@ManyToOne
 	@JoinColumn(name = "post_id")
+	@NonNull
 	private Post post;
 
 }

@@ -1,6 +1,7 @@
 package com.econo.hackday.contentsproxyblog.dto;
 
 import com.econo.hackday.contentsproxyblog.model.Account;
+import com.econo.hackday.contentsproxyblog.model.HashtagVariable;
 import com.econo.hackday.contentsproxyblog.model.Post;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

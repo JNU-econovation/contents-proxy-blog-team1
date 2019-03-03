@@ -1,6 +1,6 @@
 package com.econo.hackday.contentsproxyblog.controller;
 
-import com.econo.hackday.contentsproxyblog.model.Hashtag;
+import com.econo.hackday.contentsproxyblog.dto.HashtagSaveDto;
 import com.econo.hackday.contentsproxyblog.repository.HashtagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,8 +23,9 @@ public class HashtagController {
 	}
 
 	@PostMapping("")
-	public String createPost(Hashtag hashtag, HttpSession httpSession) {
-		hashtagRepository.save(hashtag);
+	public String createPost(HashtagSaveDto hashtagSaveDto, HttpSession httpSession) {
+		System.out.println(hashtagSaveDto.getName());
+		hashtagRepository.save(hashtagSaveDto.toEntity());
 		return "redirect:/";
 	}
 

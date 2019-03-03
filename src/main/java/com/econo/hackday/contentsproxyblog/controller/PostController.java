@@ -1,6 +1,5 @@
 package com.econo.hackday.contentsproxyblog.controller;
 
-import com.econo.hackday.contentsproxyblog.dto.HashtagDto;
 import com.econo.hackday.contentsproxyblog.dto.PostSaveRequestDto;
 import com.econo.hackday.contentsproxyblog.model.Hashtag;
 import com.econo.hackday.contentsproxyblog.service.PostService;
@@ -31,9 +30,7 @@ public class PostController {
 							 HttpSession httpSession,
 							 @RequestParam(value = "hashtags", defaultValue = "false") List<String> hashtags) {
 		System.out.println(postSaveRequestDto);
-		postService.save(postSaveRequestDto, httpSession);
-		System.out.println("테스트용" + hashtags);
-		System.out.println(hashtags.get(0));
+		postService.save(postSaveRequestDto, httpSession, hashtags);
 		return "redirect:/posts";
 	}
 

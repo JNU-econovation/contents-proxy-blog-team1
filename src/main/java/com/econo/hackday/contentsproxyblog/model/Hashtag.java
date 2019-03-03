@@ -1,24 +1,25 @@
 package com.econo.hackday.contentsproxyblog.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Hashtag {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	private Long id;
 
 	@Column(nullable = false)
 	private String name;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "hashtag")
+	private List<HashtagVariable> HashtagVariable;
 
 }
