@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -56,9 +56,9 @@ public class AccountControllerTest {
 						.build());
 
 		mockMvc.perform(post("/accounts/login")
-					.contentType(MediaType.APPLICATION_FORM_URLENCODED)
-					.param("accountId", "esp2ar0")
-					.param("password", "1234"))
+				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+				.param("accountId", "esp2ar0")
+				.param("password", "1234"))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/"))
 				.andDo(print());

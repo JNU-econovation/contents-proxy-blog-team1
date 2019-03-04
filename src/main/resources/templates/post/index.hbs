@@ -2,55 +2,62 @@
 <html>
 <head>
     <title>contents-proxy-blog-team1</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
 </head>
 <body>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>조회수</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#posts}}
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>조회수</th>
+        <th>태그</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#posts}}
         <tr>
             <td><a href="/posts/{{id}}">{{title}}</a></td>
             <td>{{writer.name}}</td>
             <td>{{viewCount}}</td>
+
+            <td>
+                {{#hashtagVariables}}
+                    <a href="/posts?hashtag={{hashtag.name}}">#{{hashtag.name}} &nbsp</a>
+                {{/hashtagVariables}}
+            </td>
         </tr>
-        {{/posts}}
-        </tbody>
-    </table>
+    {{/posts}}
+    </tbody>
+</table>
 
 
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="text-center">
-        </div>
-        <div class="col-md-3">
-            <a href="/posts/form" class="btn btn-primary pull-right" role="button">글등록</a>
-        </div>
-        <div class="col-md-3">
-            <a href="/accounts/form" class="btn btn-primary pull-right" role="button">회원가입</a>
-        </div>
-        {{^sessionedAccount}}
-            <div class="col-md-3">
-                <a href="/accounts/login" class="btn btn-primary pull-right" role="button">로그인</a>
-            </div>
-        {{/sessionedAccount}}
-        {{#sessionedAccount}}
-            <div class="col-md-3">
-                <a href="/accounts/logout" class="btn btn-primary pull-right" role="button">로그아웃</a>
-            </div>
-        {{/sessionedAccount}}
+<div class="row text-center">
+    <div class="col-md-3">
+        <a href="/posts/form" class="btn btn-primary pull-right" role="button">글등록</a>
     </div>
+    <div class="col-md-3">
+        <a href="/hashtags/form" class="btn btn-primary pull-right" role="button">태그등록</a>
+    </div>
+    <div class="col-md-3">
+        <a href="/accounts/form" class="btn btn-primary pull-right" role="button">회원가입</a>
+    </div>
+    {{^sessionedAccount}}
+        <div class="col-md-3">
+            <a href="/accounts/login" class="btn btn-primary pull-right" role="button">로그인</a>
+        </div>
+    {{/sessionedAccount}}
+    {{#sessionedAccount}}
+        <div class="col-md-3">
+            <a href="/accounts/logout" class="btn btn-primary pull-right" role="button">로그아웃</a>
+        </div>
+    {{/sessionedAccount}}
+</div>
 
-    <script src="/js/lib/jquery.min.js"></script>
-    <script src="/js/lib/bootstrap.min.js"></script>
+<script src="/js/lib/jquery.min.js"></script>
+<script src="/js/lib/bootstrap.min.js"></script>
 </body>
 </html>
